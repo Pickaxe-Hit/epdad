@@ -22,7 +22,11 @@ esp_err_t i2c_master_init(void) {
     return i2c_driver_install(I2C_NUM_0, i2c_conf.mode, 0, 0, 0);
 }
 
-esp_err_t i2c_master_read_slave(i2c_port_t i2c_num, uint8_t i2c_slave_addr, uint8_t *data_rd, size_t size, int reg) {
+esp_err_t i2c_master_read_slave(i2c_port_t i2c_num,
+                                uint8_t i2c_slave_addr,
+                                uint8_t *data_rd,
+                                size_t size,
+                                int reg) {
     if (size == 0) {
         return ESP_OK;
     }
@@ -52,7 +56,11 @@ esp_err_t i2c_master_read_slave(i2c_port_t i2c_num, uint8_t i2c_slave_addr, uint
     return ESP_OK;
 }
 
-esp_err_t i2c_master_write_slave(i2c_port_t i2c_num, uint8_t i2c_slave_addr, uint8_t ctrl, uint8_t *data_wr, size_t size) {
+esp_err_t i2c_master_write_slave(i2c_port_t i2c_num,
+                                 uint8_t i2c_slave_addr,
+                                 uint8_t ctrl,
+                                 uint8_t *data_wr,
+                                 size_t size) {
     i2c_cmd_handle_t cmd = i2c_cmd_link_create();
     i2c_master_start(cmd);
     i2c_master_write_byte(cmd, (i2c_slave_addr << 1) | I2C_MASTER_WRITE, ACK_ENABLE);
