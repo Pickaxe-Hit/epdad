@@ -1,5 +1,8 @@
 #include "i2c_master.h"
 
+#include "epd_board.h"
+
+#include "driver/i2c.h"
 #include "esp_err.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"

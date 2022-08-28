@@ -1,9 +1,5 @@
-#include "esp_err.h"
-
 #include "driver/i2c.h"
-
-#define I2C_MASTER_SCL_IO 39
-#define I2C_MASTER_SDA_IO 40
+#include "esp_err.h"
 
 #define I2C_MASTER_FREQ_HZ 400000
 

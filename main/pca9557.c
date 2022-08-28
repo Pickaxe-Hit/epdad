@@ -14,8 +14,8 @@ static esp_err_t pca9557_write_single(i2c_port_t i2c_num, int reg, uint8_t value
     return i2c_master_write_slave(i2c_num, PCA9557_ADDR, reg, data, sizeof(data));
 }
 
-esp_err_t pca9557_set_config(i2c_port_t i2c_num, uint8_t pin_num, uint8_t input) {
-    if (input) {
+esp_err_t pca9557_set_config(i2c_port_t i2c_num, uint8_t pin_num, uint8_t input_en) {
+    if (input_en) {
         *(&pca9557_conf_reg) |= (1 << pin_num);
     } else {
         *(&pca9557_conf_reg) &= ~(1 << pin_num);
@@ -32,8 +32,8 @@ esp_err_t pca9557_set_inversion(i2c_port_t i2c_num, uint8_t pin_num, uint8_t ena
     return pca9557_write_single(i2c_num, PCA9557_INV_REG, *(&pca9557_inv_reg));
 }
 
-esp_err_t pca9557_set_value(i2c_port_t i2c_num, uint8_t pin_num, uint8_t value) {
-    if (value) {
+esp_err_t pca9557_set_value(i2c_port_t i2c_num, uint8_t pin_num, uint8_t level) {
+    if (level) {
         *(&pca9557_out_reg) |= (1 << pin_num);
     } else {
         *(&pca9557_out_reg) &= ~(1 << pin_num);

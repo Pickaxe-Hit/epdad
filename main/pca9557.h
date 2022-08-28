@@ -1,5 +1,5 @@
+#include "driver/i2c.h"
 #include "esp_err.h"
-#include "i2c_master.h"
 
 #define PCA9557_ADDR 0x18
 
@@ -10,14 +10,14 @@
 
 esp_err_t pca9557_set_config(i2c_port_t i2c_num,
                              uint8_t pin_num,
-                             uint8_t input);
+                             uint8_t input_en);
 
 esp_err_t pca9557_set_inversion(i2c_port_t i2c_num,
                                 uint8_t pin_num,
                                 uint8_t enable);
 
-esp_err_t pca9557_set_value(i2c_port_t i2c_num,
+esp_err_t pca9557_set_level(i2c_port_t i2c_num,
                             uint8_t pin_num,
-                            uint8_t value);
+                            uint8_t level);
 
 uint8_t pca9557_read_input(i2c_port_t i2c_num, uint8_t pin_num);
