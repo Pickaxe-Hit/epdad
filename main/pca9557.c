@@ -41,7 +41,7 @@ esp_err_t pca9557_set_value(i2c_port_t i2c_num, uint8_t pin_num, uint8_t value) 
     return pca9557_write_single(i2c_num, PCA9557_OUT_REG, *(&pca9557_out_reg));
 }
 
-uint8_t pca9557_read_input(i2c_port_t i2c_num, int high_port) {
+uint8_t pca9557_read_input(i2c_port_t i2c_num, uint8_t pin_num) {
     esp_err_t err;
     uint8_t r_data[1];
 
@@ -50,6 +50,8 @@ uint8_t pca9557_read_input(i2c_port_t i2c_num, int high_port) {
         ESP_LOGE("PCA9557", "%s failed", __func__);
         return 0;
     }
+
+    r_data[0] = ((r_data[0] & (1 << pin_num)) >> pin_num);
 
     return r_data[0];
 }

@@ -4,7 +4,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#define ACK_ENABLE true
+#define ACK_ENABLE false
 
 esp_err_t i2c_master_init(void) {
     i2c_config_t i2c_conf = {
@@ -28,13 +28,11 @@ esp_err_t i2c_master_read_slave(i2c_port_t i2c_num, uint8_t i2c_slave_addr, uint
     i2c_master_write_byte(cmd, (i2c_slave_addr << 1) | I2C_MASTER_WRITE, ACK_ENABLE);
     i2c_master_write_byte(cmd, reg, ACK_ENABLE);
     i2c_master_stop(cmd);
-
     esp_err_t ret = i2c_master_cmd_begin(i2c_num, cmd, 1000 / portTICK_PERIOD_MS);
     if (ret != ESP_OK) {
         return ret;
     }
     i2c_cmd_link_delete(cmd);
-
     cmd = i2c_cmd_link_create();
     i2c_master_start(cmd);
     i2c_master_write_byte(cmd, (i2c_slave_addr << 1) | I2C_MASTER_READ, ACK_ENABLE);
@@ -43,13 +41,11 @@ esp_err_t i2c_master_read_slave(i2c_port_t i2c_num, uint8_t i2c_slave_addr, uint
     }
     i2c_master_read_byte(cmd, data_rd + size - 1, I2C_MASTER_NACK);
     i2c_master_stop(cmd);
-
     ret = i2c_master_cmd_begin(i2c_num, cmd, 1000 / portTICK_PERIOD_MS);
     if (ret != ESP_OK) {
         return ret;
     }
     i2c_cmd_link_delete(cmd);
-
     return ESP_OK;
 }
 

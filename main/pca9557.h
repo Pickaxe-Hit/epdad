@@ -20,5 +20,4 @@ esp_err_t pca9557_set_value(i2c_port_t i2c_num,
                             uint8_t pin_num,
                             uint8_t value);
 
-uint8_t pca9557_read_input(i2c_port_t i2c_num,
-                           int high_port);
+uint8_t pca9557_read_input(i2c_port_t i2c_num, uint8_t pin_num);
