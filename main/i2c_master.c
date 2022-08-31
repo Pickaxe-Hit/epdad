@@ -9,7 +9,7 @@
 
 #define ACK_ENABLE false
 
-esp_err_t i2c_master_init(void) {
+esp_err_t i2c_master_init(i2c_port_t i2c_num) {
     i2c_config_t i2c_conf = {
         .mode = I2C_MODE_MASTER,
         .sda_io_num = I2C_MASTER_SDA_IO,
@@ -18,8 +18,8 @@ esp_err_t i2c_master_init(void) {
         .scl_pullup_en = GPIO_PULLUP_ENABLE,
         .master.clk_speed = I2C_MASTER_FREQ_HZ,
     };
-    i2c_param_config(I2C_NUM_0, &i2c_conf);
-    return i2c_driver_install(I2C_NUM_0, i2c_conf.mode, 0, 0, 0);
+    i2c_param_config(i2c_num, &i2c_conf);
+    return i2c_driver_install(i2c_num, i2c_conf.mode, 0, 0, 0);
 }
 
 esp_err_t i2c_master_read_slave(i2c_port_t i2c_num,
@@ -71,4 +71,8 @@ esp_err_t i2c_master_write_slave(i2c_port_t i2c_num,
     esp_err_t ret = i2c_master_cmd_begin(i2c_num, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     return ret;
+}
+
+esp_err_t i2c_master_del(i2c_port_t i2c_num) {
+    return i2c_driver_delete(i2c_num);
 }

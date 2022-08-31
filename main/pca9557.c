@@ -32,7 +32,7 @@ esp_err_t pca9557_set_inversion(i2c_port_t i2c_num, uint8_t pin_num, uint8_t ena
     return pca9557_write_single(i2c_num, PCA9557_INV_REG, *(&pca9557_inv_reg));
 }
 
-esp_err_t pca9557_set_value(i2c_port_t i2c_num, uint8_t pin_num, uint8_t level) {
+esp_err_t pca9557_set_level(i2c_port_t i2c_num, uint8_t pin_num, uint8_t level) {
     if (level) {
         *(&pca9557_out_reg) |= (1 << pin_num);
     } else {

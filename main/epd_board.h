@@ -29,6 +29,8 @@
 #define EPD_DCEN_PORT 5
 #define TXS0104_EN_PORT 7
 
+#define I2C_PORT I2C_NUM_0
+
 esp_err_t epd_panel_on(void);
 
 esp_err_t epd_panel_off(void);
@@ -40,3 +42,5 @@ esp_err_t epd_power_off(void);
 esp_err_t i2c_conv_on(void);
 
 esp_err_t i2c_conv_off(void);
+
+esp_err_t epd_board_reset(void);
