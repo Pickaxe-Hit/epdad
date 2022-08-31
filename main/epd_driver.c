@@ -73,8 +73,6 @@ esp_err_t epd_panel_init(void) {
         return err;
     }
 
-    ESP_ERROR_CHECK(i2c_master_init(I2C_PORT));
-
     uint32_t gram_size = EPD_H_RES * EPD_V_RES / 4;
     epd_gram = heap_caps_calloc(gram_size, sizeof(uint8_t), MALLOC_CAP_SPIRAM);
 
@@ -166,7 +164,6 @@ esp_err_t epd_panel_del(void) {
     gpio_reset_pin(EPD_YDIO_GPIO);
     gpio_reset_pin(EPD_YOE_GPIO);
     gpio_reset_pin(EPD_XDIO_GPIO);
-    ESP_ERROR_CHECK(i2c_master_del(I2C_PORT));
     init_status = 0;
     heap_caps_free(epd_gram);
     epd_gram = NULL;
