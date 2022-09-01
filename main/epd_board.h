@@ -22,8 +22,8 @@
 #define EPD_VCOM0_GPIO 15
 #define EPD_VCOM1_GPIO 16
 
-#define I2C_MASTER_SCL_IO 39
-#define I2C_MASTER_SDA_IO 40
+#define I2C_EPD_SCL_IO 39
+#define I2C_EPD_SDA_IO 40
 
 #define EPD_EN_PORT 6
 #define EPD_DCEN_PORT 5

@@ -3,7 +3,7 @@
 
 #define I2C_MASTER_FREQ_HZ 400000
 
-esp_err_t i2c_master_init(i2c_port_t i2c_num);
+esp_err_t i2c_master_init(i2c_port_t i2c_num, int sda_num, int scl_num);
 
 esp_err_t i2c_master_read_slave(i2c_port_t i2c_num,
                                 uint8_t i2c_slave_addr,
